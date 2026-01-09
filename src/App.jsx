@@ -327,6 +327,34 @@ function App() {
                 <span className="detay-baslik">Rüzgar Yönü</span>
               </div>
             )}
+            {hava.rain && hava.rain['1h'] !== undefined && (
+              <div className="detay">
+                <span className="detay-ikon">🌧️</span>
+                <span className="detay-deger">{hava.rain['1h']} mm</span>
+                <span className="detay-baslik">Yağış (1s)</span>
+              </div>
+            )}
+            {hava.rain && hava.rain['3h'] !== undefined && (
+              <div className="detay">
+                <span className="detay-ikon">🌧️</span>
+                <span className="detay-deger">{hava.rain['3h']} mm</span>
+                <span className="detay-baslik">Yağış (3s)</span>
+              </div>
+            )}
+            {hava.snow && hava.snow['1h'] !== undefined && (
+              <div className="detay">
+                <span className="detay-ikon">❄️</span>
+                <span className="detay-deger">{hava.snow['1h']} mm</span>
+                <span className="detay-baslik">Kar (1s)</span>
+              </div>
+            )}
+            {hava.snow && hava.snow['3h'] !== undefined && (
+              <div className="detay">
+                <span className="detay-ikon">❄️</span>
+                <span className="detay-deger">{hava.snow['3h']} mm</span>
+                <span className="detay-baslik">Kar (3s)</span>
+              </div>
+            )}
           </div>
         </div>
       )}
