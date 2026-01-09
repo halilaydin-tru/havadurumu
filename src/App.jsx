@@ -319,7 +319,6 @@ function App() {
   return (
 
     <div className="container">
-      {/* Dekoratif arka plan elemanları */}
       <div className="deko-daire deko-1"></div>
       <div className="deko-daire deko-2"></div>
       <div className="deko-daire deko-3"></div>
@@ -343,7 +342,6 @@ function App() {
         </button>
       </div>
 
-      {/* Popüler Şehirler */}
       <div className="populer-sehirler">
         <p className="populer-baslik">Popüler şehirler:</p>
         <div className="sehir-butonlari">
@@ -361,24 +359,37 @@ function App() {
         </div>
       )}
 
+      {/* Ana hava kartı */}
+      {hava && (
+        <div className="ana-hava-karti">
+          <div className="hava-ust">
+            <div className="hava-ikon-buyuk">{havaDurumuIkonu(hava.weather[0].main)}</div>
+            <div className="hava-sicaklik-buyuk">{Math.round(hava.main.temp)}°C</div>
+            <div className="hava-aciklama-buyuk">{hava.weather[0].description}</div>
+            <div className="hava-sehir-buyuk">{hava.name}, {hava.sys.country}</div>
+          </div>
+          <div className="hava-detaylar-buyuk">
+            <div className="hava-detay-buyuk">Yağış: {hava.rain && hava.rain['1h'] ? `${hava.rain['1h']} mm` : '%'} </div>
+            <div className="hava-detay-buyuk">Nem: %{hava.main.humidity}</div>
+            <div className="hava-detay-buyuk">Rüzgar: {hava.wind.speed} km/s</div>
+          </div>
+        </div>
+      )}
+
       {/* 5 Günlük Tahmin */}
       {tahmin && tahmin.length > 0 && (
-        <div className="tahmin-bolumu">
-          <h3 className="tahmin-baslik-ic">📅 5 Günlük Tahmin</h3>
-          <p className="tahmin-uyari-ic">Yarına bile güvenme, ama yine de bak:</p>
-          <div className="tahmin-kartlari-ic">
-            {tahmin.map((gun, index) => (
-              <div key={index} className="tahmin-karti-ic">
-                <div className="tahmin-gun-ic">{gun.tarih}</div>
-                <div className="tahmin-ikon-ic">{havaDurumuIkonu(gun.icon)}</div>
-                <div className="tahmin-sicaklik-ic">
-                  <span className="tahmin-max-ic">{gun.maxTemp}°</span>
-                  <span className="tahmin-min-ic">{gun.minTemp}°</span>
-                </div>
-                <div className="tahmin-durum-ic">{gun.description}</div>
+        <div className="tahmin-bolumu-modern">
+          {tahmin.map((gun, index) => (
+            <div key={index} className="tahmin-karti-modern">
+              <div className="tahmin-gun-modern">{gun.tarih}</div>
+              <div className="tahmin-ikon-modern">{havaDurumuIkonu(gun.icon)}</div>
+              <div className="tahmin-sicaklik-modern">
+                <span className="tahmin-max-modern">{gun.maxTemp}°</span>
+                <span className="tahmin-min-modern">{gun.minTemp}°</span>
               </div>
-            ))}
-          </div>
+              <div className="tahmin-durum-modern">{gun.description}</div>
+            </div>
+          ))}
         </div>
       )}
 
