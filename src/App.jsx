@@ -475,27 +475,27 @@ function App() {
               </div>
             )}
           </div>
-        </div>
-      )}
 
-      {/* 5 Günlük Tahmin */}
-      {tahmin && tahmin.length > 0 && (
-        <div className="tahmin-container">
-          <h2 className="tahmin-baslik">📅 5 Günlük Tahmin</h2>
-          <p className="tahmin-uyari">Yarına bile güvenme, ama yine de bak:</p>
-          <div className="tahmin-kartlari">
-            {tahmin.map((gun, index) => (
-              <div key={index} className="tahmin-karti">
-                <div className="tahmin-gun">{gun.tarih}</div>
-                <div className="tahmin-ikon">{havaDurumuIkonu(gun.icon)}</div>
-                <div className="tahmin-sicaklik">
-                  <span className="tahmin-max">{gun.maxTemp}°</span>
-                  <span className="tahmin-min">{gun.minTemp}°</span>
-                </div>
-                <div className="tahmin-durum">{gun.description}</div>
+          {/* 5 Günlük Tahmin - Kart İçinde */}
+          {tahmin && tahmin.length > 0 && (
+            <div className="tahmin-bolumu">
+              <h3 className="tahmin-baslik-ic">📅 5 Günlük Tahmin</h3>
+              <p className="tahmin-uyari-ic">Yarına bile güvenme, ama yine de bak:</p>
+              <div className="tahmin-kartlari-ic">
+                {tahmin.map((gun, index) => (
+                  <div key={index} className="tahmin-karti-ic">
+                    <div className="tahmin-gun-ic">{gun.tarih}</div>
+                    <div className="tahmin-ikon-ic">{havaDurumuIkonu(gun.icon)}</div>
+                    <div className="tahmin-sicaklik-ic">
+                      <span className="tahmin-max-ic">{gun.maxTemp}°</span>
+                      <span className="tahmin-min-ic">{gun.minTemp}°</span>
+                    </div>
+                    <div className="tahmin-durum-ic">{gun.description}</div>
+                  </div>
+                ))}
               </div>
-            ))}
-          </div>
+            </div>
+          )}
         </div>
       )}
     </div>
