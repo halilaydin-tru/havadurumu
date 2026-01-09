@@ -347,23 +347,38 @@
   background: linear-gradient(135deg, rgba(100, 180, 255, 0.25) 0%, rgba(30, 58, 95, 0.3) 100%);
 }
 
-.yorum-emoji {
-  font-size: 2.5rem;
-  flex-shrink: 0;
-  animation: bounce 2s ease-in-out infinite;
+.yorumlar-bolumu-alt {
+  display: flex;
+  gap: 2rem;
+  justify-content: center;
+  margin-top: 2rem;
 }
 
-@keyframes bounce {
-  0%, 100% { transform: scale(1); }
-  50% { transform: scale(1.1); }
-}
-
-.sinirli-yorum p {
+.sinirli-yorum-alt {
+  background: linear-gradient(135deg, #2c5364 0%, #4ecdc4 100%);
   color: #fff;
-  font-size: 1.2rem;
-  line-height: 1.6;
-  margin: 0;
-  font-weight: 400;
+  padding: 1.5rem 2.5rem;
+  border-radius: 24px;
+  box-shadow: 0 8px 32px rgba(78, 205, 196, 0.15);
+  display: flex;
+  align-items: center;
+  gap: 1.2rem;
+  font-size: 1.3rem;
+  font-weight: 500;
+  min-width: 260px;
+  max-width: 400px;
+  transition: transform 0.2s;
+  border: 1px solid rgba(78, 205, 196, 0.25);
+}
+
+.sinirli-yorum-alt:hover {
+  transform: translateY(-4px) scale(1.04);
+  box-shadow: 0 16px 40px rgba(78, 205, 196, 0.25);
+}
+
+.sinirli-yorum-alt .yorum-emoji {
+  font-size: 2.2rem;
+  margin-right: 0.8rem;
 }
 
 .detaylar {
