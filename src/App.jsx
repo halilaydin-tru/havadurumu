@@ -285,6 +285,48 @@ function App() {
               <span className="detay-deger">{Math.round(hava.main.feels_like)}°C</span>
               <span className="detay-baslik">Hissedilen</span>
             </div>
+            <div className="detay">
+              <span className="detay-ikon">🔽</span>
+              <span className="detay-deger">{Math.round(hava.main.temp_min)}°C</span>
+              <span className="detay-baslik">Min</span>
+            </div>
+            <div className="detay">
+              <span className="detay-ikon">🔼</span>
+              <span className="detay-deger">{Math.round(hava.main.temp_max)}°C</span>
+              <span className="detay-baslik">Max</span>
+            </div>
+            <div className="detay">
+              <span className="detay-ikon">🎈</span>
+              <span className="detay-deger">{hava.main.pressure} hPa</span>
+              <span className="detay-baslik">Basınç</span>
+            </div>
+            <div className="detay">
+              <span className="detay-ikon">👁️</span>
+              <span className="detay-deger">{(hava.visibility / 1000).toFixed(1)} km</span>
+              <span className="detay-baslik">Görüş</span>
+            </div>
+            <div className="detay">
+              <span className="detay-ikon">☁️</span>
+              <span className="detay-deger">%{hava.clouds.all}</span>
+              <span className="detay-baslik">Bulut</span>
+            </div>
+            <div className="detay">
+              <span className="detay-ikon">🌅</span>
+              <span className="detay-deger">{new Date(hava.sys.sunrise * 1000).toLocaleTimeString('tr-TR', {hour: '2-digit', minute: '2-digit'})}</span>
+              <span className="detay-baslik">Gün Doğumu</span>
+            </div>
+            <div className="detay">
+              <span className="detay-ikon">🌇</span>
+              <span className="detay-deger">{new Date(hava.sys.sunset * 1000).toLocaleTimeString('tr-TR', {hour: '2-digit', minute: '2-digit'})}</span>
+              <span className="detay-baslik">Gün Batımı</span>
+            </div>
+            {hava.wind.deg !== undefined && (
+              <div className="detay">
+                <span className="detay-ikon">🧭</span>
+                <span className="detay-deger">{hava.wind.deg}°</span>
+                <span className="detay-baslik">Rüzgar Yönü</span>
+              </div>
+            )}
           </div>
         </div>
       )}

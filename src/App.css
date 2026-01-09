@@ -368,45 +368,52 @@
 
 .detaylar {
   grid-column: 1 / -1;
-  display: flex;
-  justify-content: space-around;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(100px, 1fr));
+  gap: 1rem;
   padding: 2rem 0 0 0;
   border-top: 1px solid rgba(78, 205, 196, 0.2);
   margin-top: 1rem;
+  width: 100%;
 }
 
 .detay {
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 0.8rem;
-  padding: 1.5rem;
-  border-radius: 20px;
+  gap: 0.5rem;
+  padding: 1.2rem 0.8rem;
+  border-radius: 16px;
+  background: rgba(78, 205, 196, 0.05);
+  border: 1px solid rgba(78, 205, 196, 0.1);
   transition: all 0.3s ease;
 }
 
 .detay:hover {
-  background: rgba(78, 205, 196, 0.1);
+  background: rgba(78, 205, 196, 0.15);
   transform: translateY(-5px);
+  border-color: rgba(78, 205, 196, 0.3);
 }
 
 .detay-ikon {
-  font-size: 3rem;
+  font-size: 2rem;
   filter: drop-shadow(0 0 10px rgba(78, 205, 196, 0.3));
 }
 
 .detay-deger {
-  font-size: 1.8rem;
+  font-size: 1.3rem;
   font-weight: 700;
   color: #fff;
+  text-align: center;
 }
 
 .detay-baslik {
-  font-size: 1.1rem;
+  font-size: 0.75rem;
   color: rgba(255, 255, 255, 0.5);
   text-transform: uppercase;
-  letter-spacing: 2px;
+  letter-spacing: 1px;
   font-weight: 500;
+  text-align: center;
 }
 
 /* Dekoratif daireler */
@@ -547,20 +554,23 @@
   }
 
   .detaylar {
-    flex-wrap: wrap;
-    gap: 1rem;
+    grid-template-columns: repeat(auto-fit, minmax(85px, 1fr));
+    gap: 0.8rem;
   }
 
   .detay {
-    flex: 1;
-    min-width: 80px;
+    padding: 1rem 0.5rem;
+  }
+
+  .detay-ikon {
+    font-size: 1.6rem;
   }
 
   .detay-deger {
-    font-size: 1.4rem;
+    font-size: 1.1rem;
   }
 
   .detay-baslik {
-    font-size: 0.85rem;
+    font-size: 0.65rem;
   }
 }
