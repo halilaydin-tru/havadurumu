@@ -90,8 +90,9 @@ function App() {
     const gunler = {};
     list.forEach(item => {
       const tarih = new Date(item.dt * 1000);
-      const gunAdi = tarih.toLocaleDateString('tr-TR', { weekday: 'short' });
-      
+      // Hatalı gün adını engelle: hem gün adı hem tarih (ör: Paz 7 Oca)
+      const gunAdi = `${tarih.toLocaleDateString('tr-TR', { weekday: 'short' })} ${tarih.getDate()} ${tarih.toLocaleDateString('tr-TR', { month: 'short' })}`;
+
       if (!gunler[gunAdi]) {
         gunler[gunAdi] = {
           gunAdi,
@@ -182,7 +183,10 @@ function App() {
       <div className="bg-animation"></div>
       
       <header className="header">
-        <h1>😒 Sinirli Hava</h1>
+        <div style={{display:'flex',alignItems:'center',gap:'1rem',justifyContent:'center'}}>
+          <span style={{fontSize:'3.5rem',lineHeight:1}} role="img" aria-label="yağmurlu">🌧️</span>
+          <h1 style={{margin:0}}>Sinirli Hava</h1>
+        </div>
         <p className="slogan">Moralini bozacak hava durumu.</p>
       </header>
 
