@@ -410,4 +410,186 @@ function App() {
   );
 }
 
-export default App
+    <div className="container">
+      {/* Dekoratif arka plan elemanları */}
+      <div className="deko-daire deko-1"></div>
+      <div className="deko-daire deko-2"></div>
+      <div className="deko-daire deko-3"></div>
+
+      <header className="header">
+        <h1>🌦️ Sinirli Hava Durumu</h1>
+        <p className="slogan">Hava durumunu öğren, moralini boz.</p>
+      </header>
+
+      <div className="arama-kutusu">
+        <input
+          type="text"
+          placeholder="Şehir adı yaz..."
+          value={sehir}
+          onChange={(e) => setSehir(e.target.value)}
+          onKeyDown={enterTusu}
+          className="sehir-input"
+        />
+        <button onClick={havaDurumuGetir} className="ara-btn" disabled={yukleniyor}>
+          {yukleniyor ? '🔄 Bakıyorum...' : '🔍 ARA'}
+        </button>
+      </div>
+
+      {/* Popüler Şehirler */}
+      <div className="populer-sehirler">
+        <p className="populer-baslik">Popüler şehirler:</p>
+        <div className="sehir-butonlari">
+          {populerSehirler.map((s) => (
+            <button key={s} className="sehir-btn" onClick={() => hizliAra(s)}>
+              {s}
+            </button>
+          ))}
+        </div>
+      </div>
+
+      {hata && (
+        <div className="hata-mesaji">
+          <span>😤</span> {hata}
+        </div>
+      )}
+
+      {hava && (
+        <div className="hava-karti">
+          <div className="sehir-adi">
+            📍 {hava.name}, {hava.sys.country}
+          </div>
+          
+          {/* Sol taraf - Sıcaklık */}
+          <div className="sicaklik-bolumu">
+            <span className="hava-ikonu">{havaDurumuIkonu(hava.weather[0].main)}</span>
+            <span className="sicaklik">{Math.round(hava.main.temp)}°C</span>
+            <div className="hava-aciklama">
+              {hava.weather[0].description}
+            </div>
+          </div>
+
+          {/* Sağ taraf - Yorumlar */}
+          <div className="yorumlar-bolumu">
+            <div className="sinirli-yorum sicaklik-yorumu">
+              <span className="yorum-emoji">😒</span>
+              <p>{sinirliYorum.sicaklik}</p>
+            </div>
+
+            <div className="sinirli-yorum durum-yorumu">
+              <span className="yorum-emoji">😤</span>
+              <p>{sinirliYorum.durum}</p>
+            </div>
+          </div>
+
+          <div className="detaylar">
+            <div className="detay">
+              <span className="detay-ikon">💨</span>
+              <span className="detay-deger">{hava.wind.speed} m/s</span>
+              <span className="detay-baslik">Rüzgar</span>
+            </div>
+            <div className="detay">
+              <span className="detay-ikon">💧</span>
+              <span className="detay-deger">%{hava.main.humidity}</span>
+              <span className="detay-baslik">Nem</span>
+            </div>
+            <div className="detay">
+              <span className="detay-ikon">🌡️</span>
+              <span className="detay-deger">{Math.round(hava.main.feels_like)}°C</span>
+              <span className="detay-baslik">Hissedilen</span>
+            </div>
+            <div className="detay">
+              <span className="detay-ikon">🔽</span>
+              <span className="detay-deger">{Math.round(hava.main.temp_min)}°C</span>
+              <span className="detay-baslik">Min</span>
+            </div>
+            <div className="detay">
+              <span className="detay-ikon">🔼</span>
+              <span className="detay-deger">{Math.round(hava.main.temp_max)}°C</span>
+              <span className="detay-baslik">Max</span>
+            </div>
+            <div className="detay">
+              <span className="detay-ikon">🎈</span>
+              <span className="detay-deger">{hava.main.pressure} hPa</span>
+              <span className="detay-baslik">Basınç</span>
+            </div>
+            <div className="detay">
+              <span className="detay-ikon">👁️</span>
+              <span className="detay-deger">{(hava.visibility / 1000).toFixed(1)} km</span>
+              <span className="detay-baslik">Görüş</span>
+            </div>
+            <div className="detay">
+              <span className="detay-ikon">☁️</span>
+              <span className="detay-deger">%{hava.clouds.all}</span>
+              <span className="detay-baslik">Bulut</span>
+            </div>
+            <div className="detay">
+              <span className="detay-ikon">🌅</span>
+              <span className="detay-deger">{new Date(hava.sys.sunrise * 1000).toLocaleTimeString('tr-TR', {hour: '2-digit', minute: '2-digit'})}</span>
+              <span className="detay-baslik">Gün Doğumu</span>
+            </div>
+            <div className="detay">
+              <span className="detay-ikon">🌇</span>
+              <span className="detay-deger">{new Date(hava.sys.sunset * 1000).toLocaleTimeString('tr-TR', {hour: '2-digit', minute: '2-digit'})}</span>
+              <span className="detay-baslik">Gün Batımı</span>
+            </div>
+            {hava.wind.deg !== undefined && (
+              <div className="detay">
+                <span className="detay-ikon">🧭</span>
+                <span className="detay-deger">{hava.wind.deg}°</span>
+                <span className="detay-baslik">Rüzgar Yönü</span>
+              </div>
+            )}
+            {hava.rain && hava.rain['1h'] !== undefined && (
+              <div className="detay">
+                <span className="detay-ikon">🌧️</span>
+                <span className="detay-deger">{hava.rain['1h']} mm</span>
+                <span className="detay-baslik">Yağış (1s)</span>
+              </div>
+            )}
+            {hava.rain && hava.rain['3h'] !== undefined && (
+              <div className="detay">
+                <span className="detay-ikon">🌧️</span>
+                <span className="detay-deger">{hava.rain['3h']} mm</span>
+                <span className="detay-baslik">Yağış (3s)</span>
+              </div>
+            )}
+            {hava.snow && hava.snow['1h'] !== undefined && (
+              <div className="detay">
+                <span className="detay-ikon">❄️</span>
+                <span className="detay-deger">{hava.snow['1h']} mm</span>
+                <span className="detay-baslik">Kar (1s)</span>
+              </div>
+            )}
+            {hava.snow && hava.snow['3h'] !== undefined && (
+              <div className="detay">
+                <span className="detay-ikon">❄️</span>
+                <span className="detay-deger">{hava.snow['3h']} mm</span>
+                <span className="detay-baslik">Kar (3s)</span>
+              </div>
+            )}
+          </div>
+
+          {/* 5 Günlük Tahmin - Kart İçinde */}
+          {tahmin && tahmin.length > 0 && (
+            <div className="tahmin-bolumu">
+              <h3 className="tahmin-baslik-ic">📅 5 Günlük Tahmin</h3>
+              <p className="tahmin-uyari-ic">Yarına bile güvenme, ama yine de bak:</p>
+              <div className="tahmin-kartlari-ic">
+                {tahmin.map((gun, index) => (
+                  <div key={index} className="tahmin-karti-ic">
+                    <div className="tahmin-gun-ic">{gun.tarih}</div>
+                    <div className="tahmin-ikon-ic">{havaDurumuIkonu(gun.icon)}</div>
+                    <div className="tahmin-sicaklik-ic">
+                      <span className="tahmin-max-ic">{gun.maxTemp}°</span>
+                      <span className="tahmin-min-ic">{gun.minTemp}°</span>
+                    </div>
+                    <div className="tahmin-durum-ic">{gun.description}</div>
+                  </div>
+                ))}
+              </div>
+            </div>
+          )}
+        </div>
+      )}
+    </div>
+  );
