@@ -53,6 +53,7 @@ body {
 }
 
 .header h1 {
+@media (max-width: 700px) {
   font-size: 3.5rem;
   font-weight: 800;
   background: linear-gradient(to right, #4ecdc4, #fff);
@@ -73,6 +74,89 @@ body {
   max-width: 500px;
   z-index: 10;
   margin-bottom: 2rem;
+  .container {
+    padding: 1rem 0.2rem;
+  }
+  .header {
+    text-align: center;
+    margin-bottom: 1.5rem;
+  }
+  .header h1 {
+    font-size: 2.2rem !important;
+    margin: 0 !important;
+  }
+  .header > div {
+    flex-direction: row !important;
+    justify-content: center !important;
+    align-items: center !important;
+    gap: 0.7rem !important;
+  }
+  .header span[role="img"] {
+    font-size: 2.2rem !important;
+  }
+  .slogan {
+    font-size: 1rem !important;
+    margin-bottom: 0.5rem !important;
+  }
+  .tahmin-container {
+    margin-top: 1.2rem;
+  }
+  .tahmin-grid {
+    gap: 0.5rem;
+    justify-content: center;
+    flex-wrap: wrap;
+  }
+  .tahmin-kart {
+    min-width: 90px;
+    max-width: 110px;
+    padding: 0.7rem 0.4rem;
+    border-radius: 12px;
+    font-size: 0.9rem;
+  }
+  .gun-adi {
+    font-size: 0.8rem;
+    margin-bottom: 0.2rem;
+  }
+  .tahmin-ikon {
+    font-size: 1.3rem;
+    margin-bottom: 0.1rem;
+  }
+  .max {
+    font-size: 1rem;
+  }
+  .min {
+    font-size: 0.7rem;
+  }
+  .hava-karti, .sonuc-alani {
+    max-width: 98vw;
+    min-width: 0;
+    padding: 0.5rem 0.2rem;
+    border-radius: 14px;
+  }
+  .kart-ust h2 {
+    font-size: 1.1rem;
+  }
+  .kart-orta .derece {
+    font-size: 2rem;
+  }
+  .kart-orta .ikon {
+    font-size: 2rem;
+  }
+  .detay-kutu {
+    font-size: 0.9rem;
+    padding: 0.2rem 0.1rem;
+  }
+  .sinirli-mesajlar {
+    flex-direction: column;
+    gap: 0.5rem;
+    margin-top: 0.7rem;
+  }
+  .mesaj-balonu {
+    font-size: 0.9rem;
+    padding: 0.5rem 0.7rem;
+    border-radius: 10px;
+  }
+}
 }
 
 .input-group {
