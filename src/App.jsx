@@ -193,12 +193,52 @@ function havaDurumuIkonu(main) {
 function App() {
   const [sehir, setSehir] = useState('');
   const [hava, setHava] = useState(null);
+  const [tahmin, setTahmin] = useState(null);
   const [yukleniyor, setYukleniyor] = useState(false);
   const [hata, setHata] = useState('');
   const [sinirliYorum, setSinirliYorum] = useState({ sicaklik: '', durum: '' });
 
   // API Key'i .env dosyasından al (GitHub'a gizli kalır)
   const API_KEY = import.meta.env.VITE_OPENWEATHER_API_KEY;
+
+  // Günlük tahminleri grupla (5 günlük)
+  const gunlukTahminleriAl = (list) => {
+    const gunler = {};
+    list.forEach(item => {
+      const tarih = new Date(item.dt * 1000);
+      const gun = tarih.toLocaleDateString('tr-TR', { weekday: 'short', day: 'numeric', month: 'short' });
+      
+      if (!gunler[gun]) {
+        gunler[gun] = {
+          tarih: gun,
+          temps: [],
+          icons: [],
+          descriptions: [],
+          main: item.weather[0].main
+        };
+      }
+      gunler[gun].temps.push(item.main.temp);
+      gunler[gun].icons.push(item.weather[0].main);
+      gunler[gun].descriptions.push(item.weather[0].description);
+    });
+
+    // Her gün için min/max ve en sık görülen hava durumunu bul
+    return Object.values(gunler).slice(0, 5).map(gun => {
+      const minTemp = Math.round(Math.min(...gun.temps));
+      const maxTemp = Math.round(Math.max(...gun.temps));
+      // En sık görülen hava durumu
+      const enSikIcon = gun.icons.sort((a, b) =>
+        gun.icons.filter(v => v === a).length - gun.icons.filter(v => v === b).length
+      ).pop();
+      return {
+        tarih: gun.tarih,
+        minTemp,
+        maxTemp,
+        icon: enSikIcon,
+        description: gun.descriptions[0]
+      };
+    });
+  };
 
   const havaDurumuGetir = async () => {
     if (!sehir.trim()) {
@@ -209,8 +249,10 @@ function App() {
     setYukleniyor(true);
     setHata('');
     setHava(null);
+    setTahmin(null);
 
     try {
+      // Anlık hava durumu
       const response = await fetch(
         `https://api.openweathermap.org/data/2.5/weather?q=${encodeURIComponent(sehir)}&appid=${API_KEY}&units=metric&lang=tr`
       );
@@ -227,6 +269,17 @@ function App() {
 
       const data = await response.json();
       setHava(data);
+
+      // 5 günlük tahmin
+      const forecastResponse = await fetch(
+        `https://api.openweathermap.org/data/2.5/forecast?q=${encodeURIComponent(sehir)}&appid=${API_KEY}&units=metric&lang=tr`
+      );
+      
+      if (forecastResponse.ok) {
+        const forecastData = await forecastResponse.json();
+        const gunlukTahmin = gunlukTahminleriAl(forecastData.list);
+        setTahmin(gunlukTahmin);
+      }
 
       // Sinirli yorumları belirle
       const sicaklikKat = sicaklikKategorisi(data.main.temp);
@@ -421,6 +474,27 @@ function App() {
                 <span className="detay-baslik">Kar (3s)</span>
               </div>
             )}
+          </div>
+        </div>
+      )}
+
+      {/* 5 Günlük Tahmin */}
+      {tahmin && tahmin.length > 0 && (
+        <div className="tahmin-container">
+          <h2 className="tahmin-baslik">📅 5 Günlük Tahmin</h2>
+          <p className="tahmin-uyari">Yarına bile güvenme, ama yine de bak:</p>
+          <div className="tahmin-kartlari">
+            {tahmin.map((gun, index) => (
+              <div key={index} className="tahmin-karti">
+                <div className="tahmin-gun">{gun.tarih}</div>
+                <div className="tahmin-ikon">{havaDurumuIkonu(gun.icon)}</div>
+                <div className="tahmin-sicaklik">
+                  <span className="tahmin-max">{gun.maxTemp}°</span>
+                  <span className="tahmin-min">{gun.minTemp}°</span>
+                </div>
+                <div className="tahmin-durum">{gun.description}</div>
+              </div>
+            ))}
           </div>
         </div>
       )}
