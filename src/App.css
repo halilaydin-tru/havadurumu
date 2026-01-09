@@ -1,3 +1,23 @@
+@media (max-width: 700px) {
+  .populer-etiketler {
+    overflow-x: auto;
+    flex-wrap: nowrap;
+    gap: 8px;
+    padding: 0 8px 4px 8px;
+    margin-left: -8px;
+    margin-right: -8px;
+    scrollbar-width: thin;
+    scrollbar-color: #4ecdc4 #0f172a;
+  }
+  .populer-etiketler span {
+    min-width: 80px;
+    text-align: center;
+    font-size: 0.95rem;
+    padding: 7px 14px;
+    border-radius: 18px;
+    white-space: nowrap;
+  }
+}
 @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;800&display=swap');
 
 * {
