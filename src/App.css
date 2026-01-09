@@ -22,84 +22,60 @@ body {
   padding: 2rem 1rem;
   background: radial-gradient(circle at top left, #1e3a5f, transparent 40%),
               radial-gradient(circle at bottom right, #4ecdc4, transparent 40%),
-              /* 5 Günlük Tahmin - Kartlar (Klasik kutulu görünüm) */
-              .tahmin-container {
-                margin-top: 2.5rem;
-              }
-              .tahmin-grid {
-                display: flex;
-                gap: 1.2rem;
-                justify-content: center;
-                flex-wrap: wrap;
-              }
-              .tahmin-kart {
-                background: rgba(78, 205, 196, 0.08);
-                border: 1px solid rgba(78, 205, 196, 0.15);
-                border-radius: 16px;
-                padding: 1rem 0.8rem;
-                display: flex;
-                flex-direction: column;
-                align-items: center;
-                gap: 0.5rem;
-                min-width: 110px;
-                max-width: 150px;
-                flex: 1;
-                transition: all 0.3s ease;
-              }
-              .tahmin-kart:hover {
-                background: rgba(78, 205, 196, 0.15);
-                border-color: rgba(78, 205, 196, 0.4);
-                transform: translateY(-3px);
-              }
-              .gun-adi {
-                font-size: 0.95rem;
-                font-weight: 600;
-                color: #4ecdc4;
-                text-transform: capitalize;
-                text-align: center;
-              }
-              .tahmin-ikon {
-                font-size: 2.2rem;
-                filter: drop-shadow(0 0 8px rgba(78, 205, 196, 0.3));
-              }
-              .tahmin-derece {
-                display: flex;
-                flex-direction: column;
-                align-items: center;
-                gap: 0.2rem;
-              }
-              .max {
-                font-size: 1.3rem;
-                font-weight: 700;
-                color: #fff;
-              }
-              .min {
-                font-size: 1rem;
-                color: rgba(255, 255, 255, 0.5);
-              }
+              #0a101d;
+  position: relative;
+  overflow-x: hidden;
+}
 
-              @media (max-width: 700px) {
-                .tahmin-grid {
-                  gap: 0.6rem;
-                }
-                .tahmin-kart {
-                  min-width: 90px;
-                  max-width: 110px;
-                  padding: 0.7rem 0.4rem;
-                }
-                .gun-adi {
-                  font-size: 0.8rem;
-                }
-                .tahmin-ikon {
-                  font-size: 1.5rem;
-                }
-                .max {
-                  font-size: 1.1rem;
-                }
-                .min {
-                  font-size: 0.8rem;
-                }
-              }
+/* Animasyonlu Parçacıklar */
+.bg-animation::before {
+  content: '';
+  position: fixed;
+  top: 0; left: 0; width: 100%; height: 100%;
+  background-image: radial-gradient(2px 2px at 20px 30px, rgba(255,255,255,0.2), transparent),
+                    radial-gradient(2px 2px at 40px 70px, rgba(255,255,255,0.1), transparent);
+  background-size: 300px 300px;
+  animation: stars 4s linear infinite;
+  pointer-events: none;
+  z-index: 0;
+}
+
+@keyframes stars {
+  from { transform: translateY(0); }
+  to { transform: translateY(-300px); }
+}
+
+/* Header */
+.header {
+  text-align: center;
+  margin-bottom: 2rem;
+  z-index: 10;
+}
+
+.header h1 {
+  font-size: 3.5rem;
+  font-weight: 800;
+  background: linear-gradient(to right, #4ecdc4, #fff);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  text-shadow: 0 0 20px rgba(78, 205, 196, 0.4);
+}
+
+.slogan {
+  color: #94a3b8;
+  font-style: italic;
+  letter-spacing: 1px;
+}
+
+/* Arama Alanı */
+.arama-container {
+  width: 100%;
+  max-width: 500px;
+  z-index: 10;
+  margin-bottom: 2rem;
+}
+
+.input-group {
   display: flex;
   background: rgba(255, 255, 255, 0.1);
   backdrop-filter: blur(10px);

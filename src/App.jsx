@@ -90,9 +90,8 @@ function App() {
     const gunler = {};
     list.forEach(item => {
       const tarih = new Date(item.dt * 1000);
-      // Sadece gün adı (ör: Paz)
       const gunAdi = tarih.toLocaleDateString('tr-TR', { weekday: 'short' });
-
+      
       if (!gunler[gunAdi]) {
         gunler[gunAdi] = {
           gunAdi,
