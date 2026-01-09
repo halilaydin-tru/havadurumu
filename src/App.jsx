@@ -90,8 +90,8 @@ function App() {
     const gunler = {};
     list.forEach(item => {
       const tarih = new Date(item.dt * 1000);
-      // Hem gün adı hem tarih (ör: Paz 10 Oca)
-      const gunAdi = `${tarih.toLocaleDateString('tr-TR', { weekday: 'short' })} ${tarih.getDate()} ${tarih.toLocaleDateString('tr-TR', { month: 'short' })}`;
+      // Sadece gün adı (ör: Paz)
+      const gunAdi = tarih.toLocaleDateString('tr-TR', { weekday: 'short' });
 
       if (!gunler[gunAdi]) {
         gunler[gunAdi] = {
