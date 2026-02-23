@@ -184,7 +184,7 @@ function App() {
       
       <header className="header">
         <div style={{display:'flex',alignItems:'center',gap:'1rem',justifyContent:'center'}}>
-          <span style={{fontSize:'3.5rem',lineHeight:1}} role="img" aria-label="yağmurlu">🌧️</span>
+          <span style={{fontSize:'3.5rem',lineHeight:1}} role="img" aria-label="şimşekli">🌩️</span>
           <h1 style={{margin:0}}>Sinirli Hava</h1>
         </div>
         <p className="slogan">Moralini bozacak hava durumu.</p>
